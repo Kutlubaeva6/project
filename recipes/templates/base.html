@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Site</title>
+    <!-- Подключение стилей -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <h1><span>Приветствую, {{ user.username }}</span></h1>
+                <a href="{% url 'home' %}">Главная</a>
+                <a href="{% url 'recipe_list' %}">Все рецепты</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'recipe_create' %}">Добавить рецепт</a>
+                <a href="{% url 'logout' %}">Выйти</a>
+                {% else %}
+                <a href="{% url 'login' %}">Войти</a>
+                <a href="{% url 'register' %}">Зарегистрироваться</a>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Рецепты на Django</p>
+    </footer>
+</body>
+</html>
